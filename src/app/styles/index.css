@@ -1,0 +1,74 @@
+@charset "UTF-8";
+*,
+*::before,
+*::after,
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Учет границ и отступов внутри размеров */
+}
+
+a,
+button {
+  border: none;
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  background: inherit;
+}
+
+.app_light_theme {
+  --dark-bg-color: #FFFFFF;
+  --inverted-dark-bg-color: #090F11;
+  --bg-color: #EFF5F6;
+  --inverted-bg-color: #0C1214;
+  --light-bg-color: #E2EEF1;
+  --inverted-light-bg-color: #151C1F;
+  --primary-color: #141C1F;
+  --secondary-color: #ADBCC0;
+  --inverted-primary-color: #DBDBDB;
+  --inverted-secondary-color: #555555;
+  --accent-color:#00C8FF;
+  --icon-color:#5ED3F3;
+  --sidebar-bg-color: #ff8099;
+}
+
+.app_dark_theme {
+  --dark-bg-color: #090F11;
+  --inverted-dark-bg-color: #FFFFFF;
+  --bg-color: #0C1214;
+  --inverted-bg-color: #EFF5F6;
+  --light-bg-color: #151C1F;
+  --inverted-light-bg-color: #E2EEF1;
+  --primary-color: #DBDBDB;
+  --secondary-color: #555555;
+  --inverted-primary-color: #141C1F;
+  --inverted-secondary-color: #ADBCC0;
+  --accent-color:#5ED3F3;
+  --icon-color:#74A2B2;
+  --sidebar-bg-color: #4c4c4c;
+}
+
+:root {
+  --font-family-main: Consolas, "Times New Roman", serif;
+  --font-size-s: 16px;
+  --line-height-s: 24px;
+  --font-s: var(--font-size-s) / var(--line-height-s) var(--font-family-main);
+  --font-size-m: 24px;
+  --line-height-m: 32px;
+  --font-m: var(--font-size-m) / var(--line-height-m) var(--font-family-main);
+  --font-size-l: 32px;
+  --line-height-l: 40px;
+  --font-l: var(--font-size-l) / var(--line-height-l) var(--font-family-main);
+}
+
+.app {
+  height: 100vh;
+  font: var(--font-m);
+  background-color: var(--light-bg-color);
+  color: var(--primary-color);
+}
+
+/*# sourceMappingURL=index.css.map */
