@@ -1,7 +1,8 @@
 import s from './styles/app.module.scss'
-import {Main} from "./Main";
-import {About} from "./About";
 import {Link, Route, Routes} from "react-router";
+import {AboutPageLazy} from "./pages/AboutPage/AboutPageLazy";
+import {MainPageLazy} from "./pages/MainPage/MainPageLazy";
+import {Suspense} from "react";
 
 interface Props {
   className?: string
@@ -11,10 +12,12 @@ interface Props {
 export const App = ({ className }: Props) => {
   return (
     <div className={s.app}>
-        <Routes>
-            <Route index element={<Main/>} />
-            <Route path="about" element={<About />} />
-        </Routes>
+        <Suspense fallback={'...loading'}>
+            <Routes>
+                <Route index element={<MainPageLazy/>} />
+                <Route path="about" element={<AboutPageLazy />} />
+            </Routes>
+        </Suspense>
 
         <Link to="/">main </Link>
         <Link to="about">about</Link>
