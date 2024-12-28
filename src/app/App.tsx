@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { useTheme } from './providers/ThemeProvider/lib/useTheme'
 import { AppRouter } from './providers/router'
 import { Navbar } from 'widgets/Navbar'
-import { Sidebar } from 'widgets/Sidebar/ui/Sidebar'
+import { Sidebar } from 'widgets/Sidebar/ui/Sidebar/Sidebar'
 
 interface Props {
   className?: string
@@ -15,9 +15,12 @@ export const App = ({ className }: Props) => {
   return (
     <div className={clsx('app', theme)}>
       <Navbar />
-      <AppRouter />
-
-      <Sidebar />
+      <div className={'content-page'}>
+        <Sidebar />
+        <div className={'page-wrapper'}>
+          <AppRouter />
+        </div>
+      </div>
     </div>
   )
 }

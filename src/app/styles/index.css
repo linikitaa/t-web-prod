@@ -62,6 +62,9 @@ button {
   --font-size-l: 32px;
   --line-height-l: 40px;
   --font-l: var(--font-size-l) / var(--line-height-l) var(--font-family-main);
+  --sidebar-width: 220px;
+  --sidebar-width-collapsed: 50px;
+  --navbar-height: 70px;
 }
 
 .app {
@@ -69,6 +72,15 @@ button {
   font: var(--font-m);
   background-color: var(--light-bg-color);
   color: var(--primary-color);
+}
+
+.content-page {
+  display: flex;
+}
+
+.page-wrapper {
+  flex-grow: 1;
+  padding: 20px;
 }
 
 /*# sourceMappingURL=index.css.map */

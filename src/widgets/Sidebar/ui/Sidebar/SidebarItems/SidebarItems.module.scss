@@ -1,0 +1,11 @@
+.link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pageIcon {
+  width: 20px;
+  height: 20px;
+  fill: var(--icon-color);
+}
