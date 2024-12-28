@@ -1,7 +1,7 @@
 import s from './SidebarItems.module.scss'
 import clsx from 'clsx'
 import { Link } from 'react-router'
-import { AppRoutes, RoutePath } from 'shared/config/routeConfig/routeConfig'
+import { RoutePath } from 'shared/config/routeConfig/routeConfig'
 import MainSvg from 'shared/assets/icons/main.svg'
 import AboutSvg from 'shared/assets/icons/about.svg'
 interface Props {
@@ -11,6 +11,8 @@ interface Props {
 const links = [
   { to: RoutePath.main, icon: MainSvg, label: 'Главная' },
   { to: RoutePath.about, icon: AboutSvg, label: 'О нас' },
+  { to: RoutePath.profile, icon: AboutSvg, label: 'Профиль' },
+  { to: RoutePath.article, icon: AboutSvg, label: 'Статьи' },
 ]
 
 export const SidebarItems = ({ className }: Props) => {

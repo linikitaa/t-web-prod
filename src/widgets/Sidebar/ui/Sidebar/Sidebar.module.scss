@@ -11,6 +11,8 @@
   background-color: var(--inverted-light-bg-color);
   color: var(--inverted-primary-color);
 
+  padding: 20px;
+
   position: relative;
 }
 .links {
@@ -25,4 +27,11 @@
   position: absolute;
   bottom: 20px;
   left: calc(var(--sidebar-width) / 2 - 12px);
+}
+
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
 }

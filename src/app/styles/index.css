@@ -70,7 +70,7 @@ button {
 .app {
   height: 100vh;
   font: var(--font-m);
-  background-color: var(--light-bg-color);
+  background-color: var(--bg-color);
   color: var(--primary-color);
 }
 
