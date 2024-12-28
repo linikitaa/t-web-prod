@@ -5,10 +5,6 @@ interface Props {
 }
 
 const MainPage = ({ className }: Props) => {
-  return (
-    <div >
-        Main
-    </div>
-  )
+  return <div>Main</div>
 }
 export default MainPage

@@ -5,11 +5,7 @@ interface Props {
 }
 
 const AboutPage = ({ className }: Props) => {
-  return (
-    <div >
-        About
-    </div>
-  )
+  return <div>About</div>
 }
 
 export default AboutPage
