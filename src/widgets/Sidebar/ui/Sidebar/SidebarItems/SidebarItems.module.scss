@@ -1,11 +1,42 @@
-.link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.SidebarItems {
+
+  &.collapsed {
+    .label {
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      transition: opacity 0.3s ease, max-width 0.3s ease;
+    }
+  }
+  .label {
+    opacity: 1;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-width 0.3s ease;
+  }
+
+  .pageIcon {
+    &.collapsed {
+      margin-right: 0;
+    }
+  }
 }
 
 .pageIcon {
   width: 20px;
   height: 20px;
   fill: var(--icon-color);
+  margin-right: 10px;
+  transition: margin-right 0.3s ease;
+  flex-shrink: 0;
+  &.collapsed {
+    margin-right:0;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  height: 40px;
 }

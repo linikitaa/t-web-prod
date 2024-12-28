@@ -3,35 +3,62 @@
   height: calc(100vh - (var(--navbar-height) + 40px));
   margin: 20px;
   border-radius: 30px;
-  overflow: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  background-color: var(--inverted-light-bg-color);
-  color: var(--inverted-primary-color);
-
+  background-color: var(--light-bg-color);
+  color: var(--primary-color);
   padding: 20px;
-
   position: relative;
+
+  transition: width 0.3s ease;
+  &.collapsed {
+    align-items: center;
+    width: var(--sidebar-width-collapsed);
+    .avatar {
+      width: 50px;
+      height: 50px;
+      margin: 0 0 30px 0;
+    }
+  }
 }
+.content {
+
+}
+
 .links {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
-.mainLink {
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 30px;
+
+  transition: all 0.3s ease;
 }
 
 .iconTheme {
   position: absolute;
   bottom: 20px;
   left: calc(var(--sidebar-width) / 2 - 12px);
+  transition: left 0.3s ease;
+  &.collapsed {
+    left: calc(var(--sidebar-width-collapsed) / 2 - 12px);
+  }
 }
 
-
-.avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+.collapsedBtn {
+  position: absolute;
+  top: calc(100vh / 2 - var(--navbar-height));
+  right: -5px;
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  &.collapsed {
+    right: calc(var(--sidebar-width-collapsed) / 2 - 15px);
+    transform: rotate(180deg); /* Поворачиваем стрелку */
+  }
 }
