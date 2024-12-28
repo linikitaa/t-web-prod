@@ -27,8 +27,8 @@ export enum SizeButton {
 }
 export const Button = ({
   className,
-  variant,
-  size,
+  variant = ButtonTheme.PRIMARY,
+  size = SizeButton.M,
   disabled,
   onClick,
   children,

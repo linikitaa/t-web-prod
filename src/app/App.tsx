@@ -6,6 +6,7 @@ import './styles/index.scss'
 import clsx from 'clsx'
 import { useTheme } from './providers/ThemeProvider/lib/useTheme'
 import { Button, ButtonTheme, SizeButton } from '../shared/ui/Button/Button'
+import { Navbar } from '../widgets/Navbar'
 
 interface Props {
   className?: string
@@ -16,8 +17,7 @@ export const App = ({ className }: Props) => {
 
   return (
     <div className={clsx('app', theme)}>
-      <Link to="/">main </Link>
-      <Link to="about">about</Link>
+      <Navbar />
       <Suspense fallback={'...loading'}>
         <Routes>
           <Route index element={<MainPageLazy />} />
