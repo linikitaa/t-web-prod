@@ -1,6 +1,5 @@
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import path from 'path'
 import { BuildPath } from './types/types'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
