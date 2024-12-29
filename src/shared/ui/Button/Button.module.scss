@@ -1,5 +1,5 @@
 .Button {
-  color: var(--primary-color);
+  color: var(--inverted-primary-color);
   border-radius: 5px;
   padding: 10px 15px;
   cursor: pointer;
@@ -24,15 +24,15 @@
   background-color: var(--primary-color);
 }
 .outline {
-  border: 2px solid var(--primary-color);
+  border: 2px solid var(--inverted-primary-color);
   font-weight: bold;
   transition: 0.3s;
   &:hover {
   }
 }
 .invertedOutline {
-  border: 2px solid var(--inverted-primary-color);
-  color: var(--inverted-primary-color);
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
   font-weight: bold;
   transition: 0.3s;
 }
