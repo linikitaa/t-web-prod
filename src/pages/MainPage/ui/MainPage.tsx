@@ -7,12 +7,7 @@ interface Props {
 }
 
 const MainPage = ({ className }: Props) => {
-  return (
-    <div className={clsx(s.MainPage, className)}>
-      MainPage
-      <BugButton />
-    </div>
-  )
+  return <div className={clsx(s.MainPage, className)}>MainPage</div>
 }
 
 export default MainPage

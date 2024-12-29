@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["ES2017", "DOM"],
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "ESNext",
@@ -10,13 +11,19 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "types": ["@testing-library/jest-dom"],
     "paths": {
       "*": ["./src/*"]
-    },
+    }
   },
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
     }
-  }
+  },
+  "include": [
+    "./config/jest/setupTests.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
+  ],
 }
