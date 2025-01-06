@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "lib": ["ES2017", "DOM"],
+    "lib": ["ESNext", "DOM"],
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "ESNext",
     "target": "es5",
-    "jsx": "react-jsx",
+    "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "types": ["node","@testing-library/jest-dom"],
     "baseUrl": ".",
-    "types": ["@testing-library/jest-dom"],
     "paths": {
       "*": ["./src/*"]
     }
@@ -24,6 +24,7 @@
   "include": [
     "./config/jest/setupTests.ts",
     "./src/**/*.ts",
-    "./src/**/*.tsx"
+    "./src/**/*.tsx",
+    "./src/**/*.d.ts"
   ],
 }

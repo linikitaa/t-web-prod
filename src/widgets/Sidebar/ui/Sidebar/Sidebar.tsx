@@ -19,8 +19,12 @@ export const Sidebar = ({ className }: Props) => {
   }
 
   return (
-    <div className={clsx(s.Sidebar, className, { [s.collapsed]: collapsed })}>
+    <div
+      data-testid={'sidebar'}
+      className={clsx(s.Sidebar, className, { [s.collapsed]: collapsed })}
+    >
       <Button
+        data-testid="sidebar-toggle"
         className={clsx(s.collapsedBtn, { [s.collapsed]: collapsed })}
         variant={ButtonTheme.CLEAR}
         onClick={onCollapsed}

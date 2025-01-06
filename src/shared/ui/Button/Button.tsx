@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 
 interface Props {
   className?: string
-  onClick: () => void
+  onClick?: () => void
   children?: ReactNode
   disabled?: boolean
   variant?: ButtonTheme
