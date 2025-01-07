@@ -2,7 +2,7 @@ import s from './Navbar.module.scss'
 import clsx from 'clsx'
 import { Button, ButtonTheme, SizeButton } from 'shared/ui/Button/Button'
 import { useState } from 'react'
-import { LoginModal } from 'features/ui/LoginModal/LoginModal'
+import { LoginModal } from 'features/AuthByUsername/ui/LoginModal/LoginModal'
 
 interface Props {
   className?: string

@@ -52,6 +52,7 @@ export const Modal = ({ className, onClose, children, isOpen }: Props) => {
     }
     return clearTimeout(timerRef.current)
   }, [isOpen, onKeyDown])
+
   return (
     <Portal>
       <div

@@ -1,0 +1,13 @@
+-react
+-ts
+-webpack
+-json-server
+-react-redux
+-redux toolkit
+-react-hook-form
+-storybook
+-jest
+-module css
+-scss
+-clsx
+
