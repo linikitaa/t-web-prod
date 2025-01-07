@@ -4,7 +4,6 @@ import { useTheme } from './providers/ThemeProvider/lib/useTheme'
 import { AppRouter } from './providers/router'
 import { Navbar } from 'widgets/Navbar'
 import { Sidebar } from 'widgets/Sidebar/ui/Sidebar/Sidebar'
-import { useEffect } from 'react'
 
 interface Props {
   className?: string

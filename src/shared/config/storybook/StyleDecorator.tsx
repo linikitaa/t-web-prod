@@ -1,7 +1,5 @@
 import { Decorator, StoryFn } from '@storybook/react'
 import React from 'react'
-import 'app/styles/index.css'
+import 'app/styles/index.scss'
 
-export const StyleDecorator: Decorator = (Story) => (
-  <div className="global-styles">{Story()}</div>
-)
+export const StyleDecorator: Decorator = (Story) => <div>{Story()}</div>

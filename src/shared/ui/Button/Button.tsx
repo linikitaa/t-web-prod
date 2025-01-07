@@ -1,7 +1,7 @@
 import s from './Button.module.scss'
 import clsx from 'clsx'
 import { ReactNode } from 'react'
-
+import React from 'react'
 interface Props {
   className?: string
   onClick?: () => void

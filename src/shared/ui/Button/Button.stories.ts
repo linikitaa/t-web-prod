@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
-import { Button, ButtonTheme } from './Button'
+import { Button, ButtonTheme, SizeButton } from './Button'
 import { StyleDecorator } from 'shared/config/storybook/StyleDecorator'
+import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator'
+import { Theme } from 'app/providers/ThemeProvider/lib/ThemeContext'
 
 const meta = {
   title: 'shared/Button',
@@ -22,33 +24,33 @@ export const Primary: Story = {
     variant: ButtonTheme.PRIMARY,
     children: 'Button',
   },
-  decorators: [StyleDecorator],
+  decorators: [StyleDecorator, ThemeDecorator(Theme.DARK)],
 }
 
-// export const Clear: Story = {
-//   args: {
-//     variant: ButtonTheme.CLEAR,
-//     children: 'Button',
-//   },
-// }
-//
-// export const INVERTED_PRIMARY: Story = {
-//   args: {
-//     variant: ButtonTheme.INVERTED_PRIMARY,
-//     children: 'Button',
-//   },
-// }
-//
-// export const Large: Story = {
-//   args: {
-//     size: SizeButton.L,
-//     children: 'Button',
-//   },
-// }
-//
-// export const Small: Story = {
-//   args: {
-//     size: SizeButton.S,
-//     children: 'Button',
-//   },
-// }
+export const Clear: Story = {
+  args: {
+    variant: ButtonTheme.CLEAR,
+    children: 'Button',
+  },
+}
+
+export const INVERTED_PRIMARY: Story = {
+  args: {
+    variant: ButtonTheme.INVERTED_PRIMARY,
+    children: 'Button',
+  },
+}
+
+export const Large: Story = {
+  args: {
+    size: SizeButton.L,
+    children: 'Button',
+  },
+}
+
+export const Small: Story = {
+  args: {
+    size: SizeButton.S,
+    children: 'Button',
+  },
+}
