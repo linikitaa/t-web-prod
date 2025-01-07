@@ -2,8 +2,13 @@ import clsx from 'clsx'
 import s from './LoginForm.module.scss'
 import { Input } from 'shared/ui/Input/Input'
 import { useCallback, useState } from 'react'
-import { useAppDispatch } from 'app/providers/StoreProvider'
+import { RootState, useAppDispatch } from 'app/providers/StoreProvider'
 import { Button, ButtonTheme, SizeButton } from 'shared/ui/Button/Button'
+import { useSelector } from 'react-redux'
+import { Text, TextTheme } from 'shared/ui/Text/Text'
+import { loginActions } from 'features/AuthByUsername'
+import { selectLoginState } from '../../model/selectors/selectLoginState'
+import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername'
 
 interface Props {
   className?: string
@@ -12,24 +17,29 @@ interface Props {
 
 export const LoginForm = ({ className, onSuccess }: Props) => {
   const dispatch = useAppDispatch()
-  // const { username, password } = useSelector((state: RootState) => state)
+  const { username, password, error, isLoading, rememberMe } = useSelector(selectLoginState)
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  const onChangeValueHandler = useCallback((value: string) => {}, [dispatch])
-
-  const onChangePasswordHandler = useCallback(
-    (password: string) => {},
+  const onChangeValueHandler = useCallback(
+    (value: string) => {
+      dispatch(loginActions.setUsername(value))
+    },
     [dispatch],
   )
 
-  const onClickLoginForm = useCallback(async () => {}, [])
+  const onChangePasswordHandler = useCallback(
+    (password: string) => {
+      dispatch(loginActions.setPassword(password))
+    },
+    [dispatch],
+  )
+  const onClickLoginForm = useCallback(async () => {
+    dispatch(loginByUsername({ username, password }))
+  }, [dispatch, username, password])
 
   return (
     <div className={clsx(s.LoginForm, className)}>
-      {/*{error && <Text subtitle={error} theme={TextTheme.ERROR} />}*/}
-      {/*{!error && <Text subtitle={'admin 123'} theme={TextTheme.PRIMARY} />}*/}
+      {error && <Text subtitle={error} theme={TextTheme.ERROR} />}
+      {!error && <Text subtitle={'admin 123'} theme={TextTheme.PRIMARY} />}
       <div className={s.formGroup}>
         <label htmlFor="username">Username:</label>
         <Input
@@ -50,11 +60,7 @@ export const LoginForm = ({ className, onSuccess }: Props) => {
           onChange={onChangePasswordHandler}
         />
       </div>
-      <Button
-        size={SizeButton.S}
-        variant={ButtonTheme.OUTLINE}
-        onClick={onClickLoginForm}
-      >
+      <Button size={SizeButton.S} variant={ButtonTheme.OUTLINE} onClick={onClickLoginForm}>
         Войти
       </Button>
     </div>

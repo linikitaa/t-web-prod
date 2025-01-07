@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import { StateSchema } from 'app/providers/StoreProvider/config/StateSchema'
 import { userReducer } from 'entities/User'
 import { useDispatch } from 'react-redux'
+import { loginReducer } from 'features/AuthByUsername'
 
 export const store = configureStore<StateSchema>({
   reducer: {
     user: userReducer,
+    login: loginReducer,
   },
   // devTools: '__IS_DEV__',
 })

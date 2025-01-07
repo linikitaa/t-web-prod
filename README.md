@@ -2,6 +2,7 @@
 -ts
 -webpack
 -json-server
+-axios
 -react-redux
 -redux toolkit
 -react-hook-form
