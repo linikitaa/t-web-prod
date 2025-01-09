@@ -1,21 +1,22 @@
-import s from './Input.module.scss'
-import clsx from 'clsx'
-import { ChangeEvent, memo } from 'react'
+import React from "react";
+import s from "./Input.module.scss";
+import clsx from "clsx";
+import { ChangeEvent, memo } from "react";
 
 interface Props {
-  className?: string
-  type?: string
-  placeholder?: string
-  id?: string
-  onChange?: (value: string) => void
-  value?: string
+  className?: string;
+  type?: string;
+  placeholder?: string;
+  id?: string;
+  onChange?: (value: string) => void;
+  value?: string;
 }
 
 export const Input = memo(
-  ({ className, id, type = 'text', onChange, placeholder, value }: Props) => {
+  ({ className, id, type = "text", onChange, placeholder, value }: Props) => {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      onChange?.(e.currentTarget.value)
-    }
+      onChange?.(e.currentTarget.value);
+    };
 
     return (
       <div className={clsx(s.InputWrapper, className)}>
@@ -28,6 +29,6 @@ export const Input = memo(
           onChange={onChangeHandler}
         />
       </div>
-    )
+    );
   },
-)
+);
