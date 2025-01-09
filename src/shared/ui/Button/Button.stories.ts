@@ -4,7 +4,7 @@ import { Button, ButtonTheme, SizeButton } from './Button'
 import { StyleDecorator } from 'shared/config/storybook/StyleDecorator'
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator'
 import { Theme } from 'app/providers/ThemeProvider/lib/ThemeContext'
-
+import 'app/styles/index.scss'
 const meta = {
   title: 'shared/Button',
   component: Button,
@@ -24,7 +24,7 @@ export const Primary: Story = {
     variant: ButtonTheme.PRIMARY,
     children: 'Button',
   },
-  decorators: [StyleDecorator, ThemeDecorator(Theme.DARK)],
+  decorators: [StyleDecorator],
 }
 
 export const Clear: Story = {
@@ -39,6 +39,14 @@ export const INVERTED_PRIMARY: Story = {
     variant: ButtonTheme.INVERTED_PRIMARY,
     children: 'Button',
   },
+}
+
+export const Outline: Story = {
+  args: {
+    variant: ButtonTheme.OUTLINE,
+    children: 'Button',
+  },
+  decorators: [ThemeDecorator(Theme.DARK), StyleDecorator],
 }
 
 export const Large: Story = {

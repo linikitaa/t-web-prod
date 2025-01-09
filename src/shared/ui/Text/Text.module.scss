@@ -13,7 +13,10 @@
 }
 
 .error {
-  .title, .subtitle {
-    color: red;
+  .title {
+    color: var(--red-light);
+  }
+  .subtitle {
+    color: var(--red-dark);
   }
 }

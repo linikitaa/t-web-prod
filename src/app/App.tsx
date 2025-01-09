@@ -4,6 +4,9 @@ import { useTheme } from './providers/ThemeProvider/lib/useTheme'
 import { AppRouter } from './providers/router'
 import { Navbar } from 'widgets/Navbar'
 import { Sidebar } from 'widgets/Sidebar/ui/Sidebar/Sidebar'
+import { useAppDispatch } from 'app/providers/StoreProvider'
+import { useEffect } from 'react'
+import { userActions } from 'entities/User'
 
 interface Props {
   className?: string
@@ -11,6 +14,10 @@ interface Props {
 
 export const App = ({ className }: Props) => {
   const { theme } = useTheme()
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(userActions.initAuthData())
+  }, [dispatch])
 
   return (
     <div className={clsx('app', theme)}>

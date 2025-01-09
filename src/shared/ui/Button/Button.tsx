@@ -36,9 +36,9 @@ export const Button = ({
   const onClickHandler = () => {
     onClick()
   }
-
   return (
-    <div
+    <button
+      disabled={disabled}
       onClick={onClickHandler}
       className={clsx(
         s.Button,
@@ -49,6 +49,6 @@ export const Button = ({
       )}
     >
       {children}
-    </div>
+    </button>
   )
 }

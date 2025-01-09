@@ -60,7 +60,12 @@ export const LoginForm = ({ className, onSuccess }: Props) => {
           onChange={onChangePasswordHandler}
         />
       </div>
-      <Button size={SizeButton.S} variant={ButtonTheme.OUTLINE} onClick={onClickLoginForm}>
+      <Button
+        disabled={isLoading}
+        size={SizeButton.S}
+        variant={ButtonTheme.OUTLINE}
+        onClick={onClickLoginForm}
+      >
         Войти
       </Button>
     </div>
