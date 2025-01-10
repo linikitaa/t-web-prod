@@ -1,29 +1,30 @@
-import s from './Button.module.scss'
-import clsx from 'clsx'
-import { ReactNode } from 'react'
-import React from 'react'
-interface Props {
-  className?: string
-  onClick?: () => void
-  children?: ReactNode
-  disabled?: boolean
-  variant?: ButtonTheme
-  size?: SizeButton
+import s from "./Button.module.scss";
+import clsx from "clsx";
+import { ReactNode } from "react";
+import React from "react";
+
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string;
+  onClick?: () => void;
+  children?: ReactNode;
+  disabled?: boolean;
+  variant?: ButtonTheme;
+  size?: SizeButton;
 }
 
 export enum ButtonTheme {
-  PRIMARY = 'primary',
-  INVERTED_PRIMARY = 'invertedPrimary',
-  OUTLINE = 'outline',
-  INVERTED_OUTLINE = 'invertedOutline',
-  DISABLED = 'disabled',
-  CLEAR = 'clear',
+  PRIMARY = "primary",
+  INVERTED_PRIMARY = "invertedPrimary",
+  OUTLINE = "outline",
+  INVERTED_OUTLINE = "invertedOutline",
+  DISABLED = "disabled",
+  CLEAR = "clear",
 }
 
 export enum SizeButton {
-  S = 'small',
-  M = 'medium',
-  L = 'large',
+  S = "small",
+  M = "medium",
+  L = "large",
 }
 export const Button = ({
   className,
@@ -32,12 +33,14 @@ export const Button = ({
   disabled,
   onClick,
   children,
+  ...otherProps
 }: Props) => {
   const onClickHandler = () => {
-    onClick()
-  }
+    onClick();
+  };
   return (
     <button
+      {...otherProps}
       disabled={disabled}
       onClick={onClickHandler}
       className={clsx(
@@ -50,5 +53,5 @@ export const Button = ({
     >
       {children}
     </button>
-  )
-}
+  );
+};

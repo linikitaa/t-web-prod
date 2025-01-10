@@ -30,10 +30,11 @@ export const Sidebar = ({ className }: Props) => {
         variant={ButtonTheme.CLEAR}
         onClick={onCollapsed}
       >
-        <ArrowSvg />
+        {collapsed ? ">" : "<"}
+        {/*<ArrowSvg />*/}
       </Button>
       <img
-        src={avatar}
+        src={avatar || ""}
         alt="ava"
         className={clsx(s.avatar, { [s.collapsed]: collapsed })}
       />

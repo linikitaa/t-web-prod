@@ -51,14 +51,15 @@
 }
 
 .collapsedBtn {
+  color: var(--primary-color);
   position: absolute;
   top: calc(100vh / 2 - var(--navbar-height));
   right: -5px;
   width: 30px;
   height: 30px;
-  transition: transform 0.3s ease;
+  //transition: transform 0.3s ease;
   &.collapsed {
     right: calc(var(--sidebar-width-collapsed) / 2 - 15px);
-    transform: rotate(180deg); /* Поворачиваем стрелку */
+    //transform: rotate(180deg); /* Поворачиваем стрелку */
   }
 }
