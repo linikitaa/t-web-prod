@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import clsx from "clsx";
 import s from "./LoginForm.module.scss";
 import { Input } from "shared/ui/Input/Input";
@@ -11,16 +11,15 @@ import { loginActions } from "features/AuthByUsername";
 import { selectLoginState } from "../../model/selectors/selectLoginState";
 import { loginByUsername } from "../../model/services/loginByUsername/loginByUsername";
 
-interface Props {
+export interface LoginFormProps {
   className?: string;
   onSuccess?: () => void;
 }
 
-export const LoginForm = ({ className, onSuccess }: Props) => {
+const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const dispatch = useAppDispatch();
   const { username, password, error, isLoading, rememberMe } =
     useSelector(selectLoginState);
-
   const onChangeValueHandler = useCallback(
     (value: string) => {
       dispatch(loginActions.setUsername(value));
@@ -72,4 +71,6 @@ export const LoginForm = ({ className, onSuccess }: Props) => {
       </Button>
     </div>
   );
-};
+});
+
+export default LoginForm;

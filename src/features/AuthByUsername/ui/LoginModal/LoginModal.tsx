@@ -1,12 +1,13 @@
-import s from './LoginModal.module.scss'
-import clsx from 'clsx'
-import { Modal } from 'shared/ui/Modal/Modal'
-import { LoginForm } from 'features/AuthByUsername/ui/LoginForm/LoginForm'
+import s from "./LoginModal.module.scss";
+import clsx from "clsx";
+import { Modal } from "shared/ui/Modal/Modal";
+import { LoginFormLazy } from "../LoginForm/LoginForm.lazy";
+import { Suspense } from "react";
 
 interface Props {
-  isOpen?: boolean
-  onClose?: () => void
-  className?: string
+  isOpen?: boolean;
+  onClose?: () => void;
+  className?: string;
 }
 
 export const LoginModal = ({ className, isOpen, onClose }: Props) => {
@@ -16,7 +17,9 @@ export const LoginModal = ({ className, isOpen, onClose }: Props) => {
       isOpen={isOpen}
       onClose={onClose}
     >
-      <LoginForm />
+      <Suspense fallback={".....loading"}>
+        <LoginFormLazy />
+      </Suspense>
     </Modal>
-  )
-}
+  );
+};
