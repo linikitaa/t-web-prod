@@ -1,6 +1,6 @@
 import s from "./Button.module.scss";
 import clsx from "clsx";
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 import React from "react";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,32 +26,34 @@ export enum SizeButton {
   M = "medium",
   L = "large",
 }
-export const Button = ({
-  className,
-  variant = ButtonTheme.PRIMARY,
-  size = SizeButton.M,
-  disabled,
-  onClick,
-  children,
-  ...otherProps
-}: Props) => {
-  const onClickHandler = () => {
-    onClick();
-  };
-  return (
-    <button
-      {...otherProps}
-      disabled={disabled}
-      onClick={onClickHandler}
-      className={clsx(
-        s.Button,
-        className,
-        variant && s[variant],
-        size && s[size],
-        disabled && s.disabled,
-      )}
-    >
-      {children}
-    </button>
-  );
-};
+export const Button = memo(
+  ({
+    className,
+    variant = ButtonTheme.PRIMARY,
+    size = SizeButton.M,
+    disabled,
+    onClick,
+    children,
+    ...otherProps
+  }: Props) => {
+    const onClickHandler = () => {
+      onClick();
+    };
+    return (
+      <button
+        {...otherProps}
+        disabled={disabled}
+        onClick={onClickHandler}
+        className={clsx(
+          s.Button,
+          className,
+          variant && s[variant],
+          size && s[size],
+          disabled && s.disabled,
+        )}
+      >
+        {children}
+      </button>
+    );
+  },
+);

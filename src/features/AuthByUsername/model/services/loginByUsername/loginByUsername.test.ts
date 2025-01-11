@@ -3,7 +3,7 @@ import { loginByUsername } from "features/AuthByUsername/model/services/loginByU
 import { Dispatch } from "react";
 import { StateSchema } from "app/providers/StoreProvider/config/StateSchema";
 import { userActions } from "entities/User";
-import { TestAsyncThunk } from "shared/lib/TestAsyncThunk/TestAsyncThunk";
+import { TestAsyncThunk } from "shared/lib/test/TestAsyncThunk/TestAsyncThunk";
 
 jest.mock("axios");
 const mockedAxios = jest.mocked(axios);

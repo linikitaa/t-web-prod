@@ -3,13 +3,13 @@ import clsx from "clsx";
 import s from "./LoginForm.module.scss";
 import { Input } from "shared/ui/Input/Input";
 import { useCallback, useState } from "react";
-import { RootState, useAppDispatch } from "app/providers/StoreProvider";
 import { Button, ButtonTheme, SizeButton } from "shared/ui/Button/Button";
 import { useSelector } from "react-redux";
 import { Text, TextTheme } from "shared/ui/Text/Text";
 import { loginActions } from "features/AuthByUsername";
 import { selectLoginState } from "../../model/selectors/selectLoginState";
 import { loginByUsername } from "../../model/services/loginByUsername/loginByUsername";
+import { useAppDispatch } from "shared/lib/hooks/useAppDipstach";
 
 export interface LoginFormProps {
   className?: string;
@@ -34,8 +34,11 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     [dispatch],
   );
   const onClickLoginForm = useCallback(async () => {
-    dispatch(loginByUsername({ username, password }));
-  }, [dispatch, username, password]);
+    const res = await dispatch(loginByUsername({ username, password }));
+    if (res.meta.requestStatus === "fulfilled") {
+      onSuccess();
+    }
+  }, [dispatch, username, password, onSuccess]);
 
   return (
     <div className={clsx(s.LoginForm, className)}>

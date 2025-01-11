@@ -1,46 +1,53 @@
-import s from './Navbar.module.scss'
-import clsx from 'clsx'
-import { Button, ButtonTheme, SizeButton } from 'shared/ui/Button/Button'
-import { useState } from 'react'
-import { LoginModal } from 'features/AuthByUsername/ui/LoginModal/LoginModal'
-import { useSelector } from 'react-redux'
-import { selectAuthData } from 'entities/User/model/selectors/selectAuthData/selectAuthData'
-import { userActions } from 'entities/User'
-import { useAppDispatch } from 'app/providers/StoreProvider'
+import s from "./Navbar.module.scss";
+import clsx from "clsx";
+import { Button, ButtonTheme, SizeButton } from "shared/ui/Button/Button";
+import { memo, useState } from "react";
+import { LoginModal } from "features/AuthByUsername/ui/LoginModal/LoginModal";
+import { useSelector } from "react-redux";
+import { selectAuthData } from "entities/User/model/selectors/selectAuthData/selectAuthData";
+import { userActions } from "entities/User";
+import { useAppDispatch } from "shared/lib/hooks/useAppDipstach";
 
 interface Props {
-  className?: string
+  className?: string;
 }
 
-export const Navbar = ({ className }: Props) => {
-  const [isAuthModal, setIsAuthModal] = useState(false)
-  const authData = useSelector(selectAuthData)
-  const dispatch = useAppDispatch()
+export const Navbar = memo(({ className }: Props) => {
+  const [isAuthModal, setIsAuthModal] = useState(false);
+  const authData = useSelector(selectAuthData);
+  const dispatch = useAppDispatch();
   const onCloseModal = () => {
-    setIsAuthModal(false)
-  }
+    setIsAuthModal(false);
+  };
   const onShowModal = () => {
-    setIsAuthModal(true)
-  }
+    setIsAuthModal(true);
+  };
   const onLogoutUser = () => {
-    dispatch(userActions.logOut())
-  }
-  console.log(authData)
+    dispatch(userActions.logOut());
+  };
   if (authData) {
     return (
       <div className={clsx(s.Navbar, className)}>
-        <Button variant={ButtonTheme.INVERTED_OUTLINE} size={SizeButton.M} onClick={onLogoutUser}>
+        <Button
+          variant={ButtonTheme.INVERTED_OUTLINE}
+          size={SizeButton.M}
+          onClick={onLogoutUser}
+        >
           LOG OUT
         </Button>
       </div>
-    )
+    );
   }
   return (
     <div className={clsx(s.Navbar, className)}>
-      <Button variant={ButtonTheme.INVERTED_OUTLINE} size={SizeButton.M} onClick={onShowModal}>
+      <Button
+        variant={ButtonTheme.INVERTED_OUTLINE}
+        size={SizeButton.M}
+        onClick={onShowModal}
+      >
         LOG IN
       </Button>
       <LoginModal isOpen={isAuthModal} onClose={onCloseModal} />
     </div>
-  )
-}
+  );
+});
