@@ -1,10 +1,11 @@
 import { DeepPartial } from "react-hook-form";
-import { StateSchema } from "app/providers/StoreProvider/config/StateSchema";
 import { selectLoginState } from "features/AuthByUsername/model/selectors/selectLoginState";
+import { StateSchema } from "app/providers/StoreProvider";
 
 describe("selectLoginState.test", () => {
   test("should return the login state", () => {
-    const state: DeepPartial<StateSchema> = {
+    let state: DeepPartial<StateSchema>;
+    state = {
       login: {
         password: "password",
         username: "username",

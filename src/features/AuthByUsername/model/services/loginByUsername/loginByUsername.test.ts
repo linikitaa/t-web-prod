@@ -1,9 +1,7 @@
 import axios from "axios";
-import { loginByUsername } from "features/AuthByUsername/model/services/loginByUsername/loginByUsername";
-import { Dispatch } from "react";
-import { StateSchema } from "app/providers/StoreProvider/config/StateSchema";
 import { userActions } from "entities/User";
 import { TestAsyncThunk } from "shared/lib/test/TestAsyncThunk/TestAsyncThunk";
+import { loginByUsername } from "features/AuthByUsername";
 
 jest.mock("axios");
 const mockedAxios = jest.mocked(axios);

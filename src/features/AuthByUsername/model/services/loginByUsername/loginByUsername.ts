@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { User, userActions } from "entities/User";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localStorage";
+import { ThunkConfig } from "app/providers/StoreProvider";
+import { instance } from "shared/api/instance";
 
 export interface loginByUsernameProps {
   username: string;
@@ -9,31 +10,22 @@ export interface loginByUsernameProps {
 }
 
 export const loginByUsername = createAsyncThunk<
-  ResponseData,
+  User,
   loginByUsernameProps,
-  { rejectValue: string }
->(
-  "login/loginByUsername",
-  async (authData, { dispatch, rejectWithValue, extra }) => {
-    try {
-      // @ts-ignore
-      const res = await extra.api.post<User>("/login", authData);
-      if (!res.data) {
-        throw new Error("No data received");
-      }
-
-      localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(res.data));
-      dispatch(userActions.setAuthData(res.data));
-      return res.data;
-    } catch (error) {
-      console.log(error.message);
-      return rejectWithValue("Неверный логин или пароль");
+  ThunkConfig<string>
+>("login/loginByUsername", async (authData, thunkAPI) => {
+  const { dispatch, rejectWithValue } = thunkAPI;
+  try {
+    const res = await instance.post("/login", authData);
+    if (!res.data) {
+      throw new Error("No data received");
     }
-  },
-);
 
-export interface ResponseData {
-  id: number;
-  username: string;
-  password: string;
-}
+    localStorage.setItem(USER_LOCALSTORAGE_KEY, JSON.stringify(res.data));
+    dispatch(userActions.setAuthData(res.data));
+    return res.data;
+  } catch (error) {
+    console.log(error.message);
+    return rejectWithValue("Неверный логин или пароль");
+  }
+});

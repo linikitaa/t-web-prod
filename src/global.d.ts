@@ -11,3 +11,6 @@ declare module "*.svg" {
   const content: FunctionComponent<SVGAttributes<SVGElement>>;
   export default content;
 }
+
+declare const __IS_DEV__: boolean;
+declare const __API__: string;

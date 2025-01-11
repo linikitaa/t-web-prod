@@ -1,5 +1,5 @@
-import { StateSchema } from 'app/providers/StoreProvider/config/StateSchema'
+import { StateSchema } from "app/providers/StoreProvider";
 
 export const selectAuthData = (state: StateSchema) => {
-  return state.user.authData
-}
+  return state.user.authData;
+};
