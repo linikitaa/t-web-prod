@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ProfileSchema } from "../types/profile";
+import { Profile, ProfileSchema } from "../types/profile";
+import { loginByUsername } from "features/AuthByUsername";
+import { fetchProfileData } from "../services/fetchProfileData/fetchProfileData";
 
 const initialState: ProfileSchema = {
   data: undefined,
-  errors: undefined,
+  error: undefined,
   isLoading: false,
   readonly: false,
 };
@@ -11,8 +13,24 @@ const initialState: ProfileSchema = {
 export const profileSlice = createSlice({
   name: "profile",
   initialState,
-  reducers: {
-    setAuthData: (state, action: PayloadAction) => {},
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProfileData.pending, (state, action) => {
+        state.error = undefined;
+        state.isLoading = true;
+      })
+      .addCase(
+        fetchProfileData.fulfilled,
+        (state, action: PayloadAction<Profile>) => {
+          state.isLoading = false;
+          state.data = action.payload;
+        },
+      )
+      .addCase(fetchProfileData.rejected, (state, action) => {
+        state.error = action?.payload;
+        state.isLoading = false;
+      });
   },
 });
 
