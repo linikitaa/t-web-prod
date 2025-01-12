@@ -1,6 +1,6 @@
-import s from './Modal.module.scss'
-import clsx from 'clsx'
-import React from 'react'
+import s from "./Modal.module.scss";
+import clsx from "clsx";
+import React from "react";
 import {
   ReactNode,
   MouseEvent,
@@ -8,50 +8,52 @@ import {
   useRef,
   useEffect,
   useCallback,
-} from 'react'
-import { useTheme } from 'app/providers/ThemeProvider/lib/useTheme'
-import { Portal } from 'shared/ui/Portal/Portal'
+} from "react";
+import { useTheme } from "app/providers/ThemeProvider/lib/useTheme";
+import { Portal } from "shared/ui/Portal/Portal";
 
 interface Props {
-  isOpen?: boolean
-  onClose?: () => void
-  className?: string
-  children?: ReactNode
+  isOpen?: boolean;
+  onClose?: () => void;
+  className?: string;
+  children?: ReactNode;
 }
-const ANIMATION_DELAY = 300
+const ANIMATION_DELAY = 300;
 export const Modal = ({ className, onClose, children, isOpen }: Props) => {
-  const [isClosing, setIsClosing] = useState(false)
-  const { theme } = useTheme()
-  const timerRef = useRef<ReturnType<typeof setTimeout>>(null)
+  const [isClosing, setIsClosing] = useState(false);
+  const { theme } = useTheme();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const closeModal = useCallback(() => {
     if (onClose) {
-      setIsClosing(true)
+      setIsClosing(true);
       timerRef.current = setTimeout(() => {
-        onClose()
-        setIsClosing(false)
-      }, ANIMATION_DELAY)
+        onClose();
+        setIsClosing(false);
+      }, ANIMATION_DELAY);
     }
-  }, [onClose])
+  }, [onClose]);
 
   const onContentClick = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-  }
+    e.stopPropagation();
+  };
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeModal()
+      if (e.key === "Escape") {
+        closeModal();
       }
     },
     [closeModal],
-  )
+  );
 
   useEffect(() => {
     if (isOpen) {
-      window.addEventListener('keydown', onKeyDown)
+      window.addEventListener("keydown", onKeyDown);
     }
-    return clearTimeout(timerRef.current)
-  }, [isOpen, onKeyDown])
+    return () => {
+      timerRef.current && clearTimeout(timerRef.current);
+    };
+  }, [isOpen, onKeyDown]);
 
   return (
     <Portal>
@@ -71,5 +73,5 @@ export const Modal = ({ className, onClose, children, isOpen }: Props) => {
         </div>
       </div>
     </Portal>
-  )
-}
+  );
+};

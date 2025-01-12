@@ -37,7 +37,9 @@ export const Button = memo(
     ...otherProps
   }: Props) => {
     const onClickHandler = () => {
-      onClick();
+      if (onClick) {
+        onClick();
+      }
     };
     return (
       <button

@@ -3,6 +3,11 @@ import s from "./Input.module.scss";
 import clsx from "clsx";
 import { ChangeEvent, memo } from "react";
 
+export enum InputTheme {
+  PRIMARY = "primary",
+  INVERTED_PRIMARY = "invertedPrimary",
+}
+
 interface Props {
   className?: string;
   type?: string;
@@ -10,10 +15,19 @@ interface Props {
   id?: string;
   onChange?: (value: string) => void;
   value?: string;
+  variant?: InputTheme;
 }
 
 export const Input = memo(
-  ({ className, id, type = "text", onChange, placeholder, value }: Props) => {
+  ({
+    className,
+    id,
+    type = "text",
+    onChange,
+    placeholder,
+    value,
+    variant = InputTheme.PRIMARY,
+  }: Props) => {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
       onChange?.(e.currentTarget.value);
     };
@@ -25,7 +39,7 @@ export const Input = memo(
           placeholder={placeholder}
           value={value}
           id={id}
-          className={s.input}
+          className={clsx(s.input, variant && s[variant])}
           onChange={onChangeHandler}
         />
       </div>

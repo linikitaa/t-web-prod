@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import clsx from "clsx";
 import s from "./LoginForm.module.scss";
-import { Input } from "shared/ui/Input/Input";
+import { Input, InputTheme } from "shared/ui/Input/Input";
 import { useCallback, useState } from "react";
 import { Button, ButtonTheme, SizeButton } from "shared/ui/Button/Button";
 import { useSelector } from "react-redux";
@@ -36,7 +36,9 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const onClickLoginForm = useCallback(async () => {
     const res = await dispatch(loginByUsername({ username, password }));
     if (res.meta.requestStatus === "fulfilled") {
-      onSuccess();
+      if (onSuccess) {
+        onSuccess();
+      }
     }
   }, [dispatch, username, password, onSuccess]);
 
@@ -47,6 +49,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
       <div className={s.formGroup}>
         <label htmlFor="username">Username:</label>
         <Input
+          variant={InputTheme.INVERTED_PRIMARY}
           value={username}
           placeholder={"введите username"}
           type="text"
@@ -57,6 +60,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
       <div className={s.formGroup}>
         <label htmlFor="password">Password:</label>
         <Input
+          variant={InputTheme.INVERTED_PRIMARY}
           value={password}
           placeholder={"введите пароль"}
           type="password"

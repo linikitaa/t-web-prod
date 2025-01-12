@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { User, userActions } from "entities/User";
 import { USER_LOCALSTORAGE_KEY } from "shared/const/localStorage";
-import { ThunkConfig } from "app/providers/StoreProvider";
+import { ThunkConfig, ThunkExtraArg } from "app/providers/StoreProvider";
 import { instance } from "shared/api/instance";
 
 export interface loginByUsernameProps {
@@ -12,11 +12,11 @@ export interface loginByUsernameProps {
 export const loginByUsername = createAsyncThunk<
   User,
   loginByUsernameProps,
-  ThunkConfig<string>
+  { rejectValue: string }
 >("login/loginByUsername", async (authData, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
   try {
-    const res = await instance.post("/login", authData);
+    const res = await instance.post<User>("/login", authData);
     if (!res.data) {
       throw new Error("No data received");
     }
@@ -25,7 +25,8 @@ export const loginByUsername = createAsyncThunk<
     dispatch(userActions.setAuthData(res.data));
     return res.data;
   } catch (error) {
-    console.log(error.message);
-    return rejectWithValue("Неверный логин или пароль");
+    const errorMessage =
+      error instanceof Error ? error.message : "Непредвиденная ошибка";
+    return rejectWithValue(errorMessage);
   }
 });

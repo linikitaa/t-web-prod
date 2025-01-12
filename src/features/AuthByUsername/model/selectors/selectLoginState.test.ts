@@ -10,7 +10,7 @@ describe("selectLoginState.test", () => {
         password: "password",
         username: "username",
         isLoading: false,
-        error: null,
+        error: "",
         rememberMe: false,
       },
     };

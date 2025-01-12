@@ -1,64 +1,61 @@
 import axios from "axios";
 import { userActions } from "entities/User";
-import { TestAsyncThunk } from "shared/lib/test/TestAsyncThunk/TestAsyncThunk";
 import { loginByUsername } from "features/AuthByUsername";
+import { instance } from "shared/api/instance";
 
 jest.mock("axios");
-const mockedAxios = jest.mocked(axios);
+jest.mock("shared/api/instance", () => ({
+  instance: {
+    post: jest.fn(),
+  },
+}));
+
+const mockedAxios = jest.mocked(axios, { shallow: true });
+const mockedInstance = jest.mocked(instance);
 
 describe("loginByUsername.test", () => {
+  beforeEach(() => {
+    mockedInstance.post.mockClear();
+  });
+
   test("success login", async () => {
     const userValue = { username: "123", id: "1" };
-    mockedAxios.post.mockReturnValue(Promise.resolve({ data: userValue }));
+    mockedInstance.post.mockResolvedValueOnce({ data: userValue });
 
-    const thunk = new TestAsyncThunk(loginByUsername);
-    const res = await thunk.callThunk({ username: "123", password: "123" });
+    const dispatch = jest.fn();
+    const thunk = loginByUsername({ username: "123", password: "123" });
+    const result = await thunk(dispatch, () => ({}), undefined);
 
-    expect(thunk.dispatch).toHaveBeenCalledWith(
-      userActions.setAuthData(userValue),
-    );
-    expect(mockedAxios.post).toHaveBeenCalled();
-    expect(res.meta.requestStatus).toBe("fulfilled");
-    expect(res.payload).toEqual(userValue);
+    expect(mockedInstance.post).toHaveBeenCalledWith("/login", {
+      username: "123",
+      password: "123",
+    });
+    expect(dispatch).toHaveBeenCalledWith(userActions.setAuthData(userValue));
+    expect(result.meta.requestStatus).toBe("fulfilled");
+    expect(result.payload).toEqual(userValue);
   });
 
   test("error login", async () => {
-    mockedAxios.post.mockReturnValue(Promise.resolve({ status: 403 }));
-    const thunk = new TestAsyncThunk(loginByUsername);
-    const res = await thunk.callThunk({ username: "123", password: "123" });
+    mockedInstance.post.mockRejectedValueOnce(new Error("Ошибка"));
 
-    expect(mockedAxios.post).toHaveBeenCalled();
-    expect(res.meta.requestStatus).toBe("rejected");
-    expect(res.payload).toBe("Неверный логин или пароль");
+    const dispatch = jest.fn();
+    const thunk = loginByUsername({ username: "123", password: "123" });
+    const result = await thunk(dispatch, () => ({}), undefined);
+
+    expect(mockedInstance.post).toHaveBeenCalledWith("/login", {
+      username: "123",
+      password: "123",
+    });
+    expect(dispatch).not.toHaveBeenCalledWith(
+      userActions.setAuthData(expect.anything()),
+    );
+    expect(result.meta.requestStatus).toBe("rejected");
+    expect(result.payload).toBe("Ошибка");
+  });
+
+  test("instance.post is called", () => {
+    mockedInstance.post.mockResolvedValueOnce({});
+    instance.post("/test", { data: "test" });
+    expect(mockedInstance.post).toHaveBeenCalledWith("/test", { data: "test" });
   });
 });
-//
-// describe("loginByUsername.test", () => {
-//   let dispatch: Dispatch<Dispatch<any>>;
-//   let getState: () => StateSchema;
-//   beforeEach(() => {
-//     dispatch = jest.fn();
-//     getState = jest.fn();
-//   });
-//   test("success login", async () => {
-//     const userValue = { username: "123", id: "1" };
-//     mockedAxios.post.mockReturnValue(Promise.resolve({ data: userValue }));
-//     const action = loginByUsername({ username: "123", password: "123" });
-//     const res = await action(dispatch, getState, undefined);
-//
-//     expect(dispatch).toHaveBeenCalledWith(userActions.setAuthData(userValue));
-//     expect(mockedAxios.post).toHaveBeenCalled();
-//     expect(res.meta.requestStatus).toBe("fulfilled");
-//     expect(res.payload).toEqual(userValue);
-//   });
-//
-//   test("error login", async () => {
-//     mockedAxios.post.mockReturnValue(Promise.resolve({ status: 403 }));
-//     const action = loginByUsername({ username: "123", password: "123" });
-//     const res = await action(dispatch, getState, undefined);
-//
-//     expect(mockedAxios.post).toHaveBeenCalled();
-//     expect(res.meta.requestStatus).toBe("rejected");
-//     expect(res.payload).toBe("Неверный логин или пароль");
-//   });
-// });

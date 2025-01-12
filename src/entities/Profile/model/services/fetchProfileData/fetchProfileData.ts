@@ -6,7 +6,7 @@ import { Profile } from "../../types/profile";
 export const fetchProfileData = createAsyncThunk<
   Profile,
   void,
-  ThunkConfig<string>
+  { rejectValue: string }
 >("profile/fetchProfileData", async (_, thunkAPI) => {
   const { rejectWithValue } = thunkAPI;
   try {
@@ -16,7 +16,6 @@ export const fetchProfileData = createAsyncThunk<
     }
     return res.data;
   } catch (error) {
-    console.log(error.message);
     return rejectWithValue("error");
   }
 });
