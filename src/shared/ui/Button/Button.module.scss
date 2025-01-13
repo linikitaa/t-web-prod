@@ -35,6 +35,16 @@
   font-weight: bold;
   transition: 0.3s;
 }
+.invertedOutlineRed {
+  border: 2px solid var(--red-light);
+  color: var(--red-light);
+  font-weight: bold;
+  transition: 0.3s;
+  &:hover {
+    border: 2px solid var(--red-dark);
+    color: var(--red-dark);
+  }
+}
 .small {
   font: var(--font-s);
 }

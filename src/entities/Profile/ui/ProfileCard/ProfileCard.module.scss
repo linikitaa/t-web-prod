@@ -1,6 +1,7 @@
 .ProfileCard {
   padding: 20px;
   border: 2px solid var(--inverted-bg-color);
+  border-radius: 10px;
 }
 
 .header {
@@ -8,9 +9,23 @@
 }
 
 .data {
-  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .input {
-  margin-top: 10px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }

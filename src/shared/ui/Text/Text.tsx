@@ -1,6 +1,6 @@
 import s from "./Text.module.scss";
 import clsx from "clsx";
-import React, { memo } from "react";
+import React, { memo, ReactNode } from "react";
 export enum TextTheme {
   PRIMARY = "primary",
   ERROR = "error",
@@ -9,7 +9,7 @@ export enum TextTheme {
 interface Props {
   className?: string;
   title?: string;
-  subtitle?: string;
+  subtitle?: string | ReactNode;
   theme?: TextTheme;
 }
 

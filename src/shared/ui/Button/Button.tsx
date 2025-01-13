@@ -17,6 +17,7 @@ export enum ButtonTheme {
   INVERTED_PRIMARY = "invertedPrimary",
   OUTLINE = "outline",
   INVERTED_OUTLINE = "invertedOutline",
+  INVERTED_OUTLINE_RED = "invertedOutlineRed",
   DISABLED = "disabled",
   CLEAR = "clear",
 }
